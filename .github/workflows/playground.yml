@@ -30,8 +30,10 @@ jobs:
       # CRITICAL: Note how the Python code lines are indented perfectly relative to 'run: |'
       - name: Execute Python Script
         run: |
+          python -c "
           import os
           import platform
-          print("Hello from Python inside GitHub Actions!")
-          print(f"Python Version: {platform.python_version()}")
-          print(f"Triggered by GitHub Actor: {os.getenv('GITHUB_ACTOR')}")
+          print('Hello from Python inside GitHub Actions!')
+          print(f'Python Version: {platform.python_version()}')
+          print(f'Triggered by GitHub Actor: {os.getenv(\"GITHUB_ACTOR\")}')
+          "
