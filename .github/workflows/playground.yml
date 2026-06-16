@@ -1,24 +1,18 @@
-# 1. The name of your workflow as it appears in the GitHub Actions tab
 name: DevOps Training Playground
 
-# 2. The TRIGGER: What event starts this workflow?
 on:
   push:
-    branches: [ "main" ]  # Runs every time you push code to the main branch
-  workflow_dispatch:       # Allows you to trigger this workflow manually from the UI
+    branches: [ "main" ]
+  workflow_dispatch:
 
-# 3. The WORK: What should this automation actually do?
 jobs:
   explore-devops:
-    # Tell GitHub what OS to provision for the runner (VM)
     runs-on: ubuntu-latest
 
     steps:
-      # Step A: Download a copy of your repository code onto the runner
       - name: Check out repository code
         uses: actions/checkout@v4
 
-      # Step B: Run standard Linux commands (leveraging your Linux knowledge)
       - name: Run Linux Shell Commands
         run: |
           echo "Current working directory:"
@@ -28,13 +22,12 @@ jobs:
           echo "Kernel version of this runner:"
           uname -a
 
-      # Step C: Setup Python on the runner environment
       - name: Set up Python Execution Environment
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      # Step D: Run Inline Python (leveraging your Python knowledge)
+      # CRITICAL: Note how the Python code lines are indented perfectly relative to 'run: |'
       - name: Execute Python Script
         run: |
           import os
