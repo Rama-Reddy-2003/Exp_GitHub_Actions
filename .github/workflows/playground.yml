@@ -1,0 +1,46 @@
+name: DevOps Training Playground
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  explore-devops:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Download your repository code onto the runner
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
+      # Step 2: Run standard Linux commands
+      - name: Run Linux Shell Commands
+        run: |
+          echo "======================================"
+          echo "Current working directory:"
+          pwd
+          echo "Listing files in repo:"
+          ls -la
+          echo "Kernel version of this runner:"
+          uname -a
+          echo "======================================"
+
+      # Step 3: Setup Python on the runner environment
+      - name: Set up Python Execution Environment
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      # Step 4: Run Python code by passing it directly to the python interpreter
+      - name: Execute Inline Python Script
+        run: |
+          python -c "
+          import os
+          import platform
+          print('======================================')
+          print('Hello from Python inside GitHub Actions!')
+          print(f'Python Version: {platform.python_version()}')
+          print(f'Triggered by GitHub Actor: {os.getenv(\"GITHUB_ACTOR\")}')
+          print('======================================')
+          "
